@@ -5,8 +5,11 @@ import (
 	"log"
 	"net"
 	"sync"
+	"strings"
+"strconv"
 
 	"github.com/issaalmusawi/repo3-crypt/mycrypt"
+	conv"github.com/issaalmusawi/funtest/konv"
 )
 
 func main() {
@@ -55,12 +58,27 @@ go func(c net.Conn) {
 
 		_, err = c.Write([]byte(string(encryptedResponse)))
 		if err != nil {
+			log.Fatal(err)
+		}
+		case "Kjevik":
+		line := "Kjevik;SN39040;18.03.2022 01:50;6"
+		parts := strings.Split(line, ";")
+		temperatureC, err := strconv.ParseFloat(parts[len(parts)-1], 64)
+		if err != nil{
+			log.Fatal(err)
+		}
+		temperatureF := conv.CelsiusToFahrenheit(temperatureC)
+
+		encryptedResponse, err := mycrypt.Krypter([]rune(strconv.FormatFloat(temperatureF, 'f', 2, 64)), 4)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		_, err = c.Write([]byte(string(encryptedResponse)))
+		if err != nil{
 			log.Println(err)
 			return
 		}
-	//	case "Kjevik":
-
-
 
 	default:
 		decryptedMsg, err := mycrypt.Krypter([]rune(msg), -4)

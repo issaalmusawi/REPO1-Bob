@@ -1,2 +1,4 @@
-github.com/issaalmusawi/repo3-crypt v0.0.0-20230419150026-976459eafae7 h1:xv1aX1LRvfa8I0dAAyuBHtXG4rEQGNf5ffbHNRQ3HKA=
-github.com/issaalmusawi/repo3-crypt v0.0.0-20230419150026-976459eafae7/go.mod h1:I1RTKLNnRfElWBGdPPSQ9ME2yNRdft2+qZ6/V+TYd2k=
+github.com/issaalmusawi/funtest v0.0.0-20230220161234-4a0db0444f5e h1:Py119dwNwSIGuSSwC7vT0VFFF/QJK2lOYsGHnh0MelM=
+github.com/issaalmusawi/funtest v0.0.0-20230220161234-4a0db0444f5e/go.mod h1:hkHepNGMKH7FPqppPQSsiRlbUYJvgQ0FSoA+UbJ354E=
+github.com/issaalmusawi/repo3-crypt v0.0.0-20230421091850-2efbb1545c2c h1:S3hdR+lzWgYxslZJU05WkHTeoc3ljlU+2qvhtdAPGfI=
+github.com/issaalmusawi/repo3-crypt v0.0.0-20230421091850-2efbb1545c2c/go.mod h1:I1RTKLNnRfElWBGdPPSQ9ME2yNRdft2+qZ6/V+TYd2k=
