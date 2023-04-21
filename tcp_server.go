@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"sync"
+	"math"
 	"strings"
 "strconv"
 
@@ -60,7 +61,7 @@ go func(c net.Conn) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		case "Kjevik":
+		case "Kjevik;SN39040;18.03.2022 01:50;6":
 		line := "Kjevik;SN39040;18.03.2022 01:50;6"
 		parts := strings.Split(line, ";")
 		temperatureC, err := strconv.ParseFloat(parts[len(parts)-1], 64)
@@ -69,7 +70,9 @@ go func(c net.Conn) {
 		}
 		temperatureF := conv.CelsiusToFahrenheit(temperatureC)
 
-		encryptedResponse, err := mycrypt.Krypter([]rune(strconv.FormatFloat(temperatureF, 'f', 2, 64)), 4)
+		parts[len(parts)-1] = strconv.FormatFloat(math.Round(temperatureF*100)/100, 'f', 1, 64)
+		newLine := strings.Join(parts, ";")
+		encryptedResponse, err := mycrypt.Krypter([]rune(newLine), 4)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -81,13 +84,14 @@ go func(c net.Conn) {
 		}
 
 	default:
-		decryptedMsg, err := mycrypt.Krypter([]rune(msg), -4)
-		if err != nil {
-			log.Fatal(err)
-		}
+	//	_, err := c.Write([]byte(msg))
+	//	if err != nil {
+	//		log.Println(err)
+	//		return
+	//	}
 
 	//	_, err := []byte(string(decryptedMsg))
-		_, err = c.Write([]byte(string(decryptedMsg)))
+		_, err = c.Write([]byte(msg))
 
 	//	_, err = c.Write([]byte(string(decryptedMsg)))
 		if err != nil {
